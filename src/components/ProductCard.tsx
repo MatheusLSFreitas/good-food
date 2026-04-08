@@ -16,22 +16,22 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="group bg-card rounded-lg overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow animate-slide-up">
-      <div className="aspect-square overflow-hidden">
+    <div className="group bg-card rounded-xl overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow animate-slide-up">
+      <div className="aspect-[4/3] overflow-hidden">
         <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
           width={512}
-          height={512}
+          height={384}
         />
       </div>
-      <div className="p-4 space-y-2">
-        <h3 className="font-bold text-card-foreground text-lg leading-tight">
+      <div className="p-4 space-y-3">
+        <h3 className="font-bold text-card-foreground text-base leading-tight">
           {product.name}
         </h3>
-        <p className="text-muted-foreground text-sm leading-snug">
+        <p className="text-muted-foreground text-sm leading-snug line-clamp-2">
           {product.description}
         </p>
         <div className="flex items-center justify-between pt-1">
@@ -40,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </span>
           <button
             onClick={handleAdd}
-            className="flex items-center gap-1.5 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-bold text-sm hover:opacity-90 active:scale-95 transition-all"
+            className="flex items-center gap-1.5 bg-primary text-primary-foreground px-5 py-3 rounded-xl font-bold text-sm hover:opacity-90 active:scale-95 transition-all min-h-[44px]"
           >
             <Plus size={18} />
             Adicionar
