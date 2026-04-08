@@ -18,7 +18,7 @@ const AdminLogin = () => {
     e.preventDefault();
     if (user === ADMIN_USER && pass === ADMIN_PASS) {
       sessionStorage.setItem("admin_auth", "true");
-      navigate("/orders", { replace: true });
+      navigate("/admin", { replace: true });
     } else {
       toast.error("Usuário ou senha incorretos");
     }
