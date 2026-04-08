@@ -20,7 +20,7 @@ interface AppStore {
   // Orders
   orders: Order[];
   nextOrderNumber: number;
-  createOrder: (items: CartItem[], total: number) => Order;
+  createOrder: (items: CartItem[], total: number, customerName?: string) => Order;
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
 
   // Current completed order (for confirmation screen)
@@ -87,11 +87,12 @@ export const useStore = create<AppStore>((set, get) => ({
   orders: [],
   nextOrderNumber: 1,
 
-  createOrder: (items, total) => {
+  createOrder: (items, total, customerName) => {
     const num = get().nextOrderNumber;
     const order: Order = {
       id: crypto.randomUUID(),
       number: String(num).padStart(3, "0"),
+      customerName: customerName?.trim() || undefined,
       items,
       total,
       status: "paid",

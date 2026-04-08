@@ -16,6 +16,7 @@ export type OrderStatus = "paid" | "preparing" | "ready";
 export interface Order {
   id: string;
   number: string;
+  customerName?: string;
   items: CartItem[];
   total: number;
   status: OrderStatus;

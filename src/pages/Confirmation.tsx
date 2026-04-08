@@ -29,6 +29,11 @@ const Confirmation = () => {
           <p className="text-primary-foreground text-7xl font-extrabold mt-2">
             {currentOrder.number}
           </p>
+          {currentOrder.customerName && (
+            <p className="text-primary-foreground/80 text-lg font-bold mt-1">
+              {currentOrder.customerName}
+            </p>
+          )}
         </div>
 
         <div className="bg-card rounded-lg border border-border p-4 space-y-2 text-left animate-slide-up">
