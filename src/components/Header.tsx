@@ -14,7 +14,7 @@ export function Header() {
         </Link>
         <div className="flex items-center gap-3">
           <Link
-            to="/orders"
+            to="/admin"
             className="text-primary-foreground/80 hover:text-primary-foreground font-semibold text-sm transition-colors"
           >
             Painel
