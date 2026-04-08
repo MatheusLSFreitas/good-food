@@ -6,19 +6,19 @@ const Index = () => {
   const products = useStore((s) => s.products);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-6">
       <Header />
-      <main className="container py-6 space-y-6">
+      <main className="container px-4 py-6 space-y-6">
         <div className="text-center space-y-1">
-          <h1 className="text-3xl font-extrabold text-foreground">Cardápio</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground">Cardápio</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Escolha seus itens e retire sem fila!
           </p>
         </div>
         {products.length === 0 ? (
           <p className="text-center text-muted-foreground py-12">Nenhum produto disponível.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
