@@ -80,7 +80,12 @@ const OrdersPanel = () => {
                       className="bg-card rounded-lg border border-border p-4 space-y-3 animate-slide-up"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-3xl font-extrabold text-primary">#{order.number}</span>
+                        <div>
+                          <span className="text-3xl font-extrabold text-primary">#{order.number}</span>
+                          {order.customerName && (
+                            <span className="ml-2 text-sm font-bold text-muted-foreground">– {order.customerName}</span>
+                          )}
+                        </div>
                         <span className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold ${config.className}`}>
                           {config.icon}
                           {config.label}

@@ -18,6 +18,7 @@ const Payment = () => {
 
   const [method, setMethod] = useState<PaymentMethod>(null);
   const [state, setState] = useState<PaymentState>("choosing");
+  const [customerName, setCustomerName] = useState("");
 
   if (cart.length === 0 && state !== "approved") {
     navigate("/");
@@ -28,7 +29,7 @@ const Payment = () => {
     setState("processing");
     setTimeout(() => {
       setState("approved");
-      const order = createOrder([...cart], total);
+      const order = createOrder([...cart], total, customerName);
       setCurrentOrder(order);
       clearCart();
       setTimeout(() => navigate("/confirmation"), 1500);
@@ -77,6 +78,18 @@ const Payment = () => {
             <span>Total</span>
             <span className="text-primary">R$ {total.toFixed(2)}</span>
           </div>
+        </div>
+
+        <div className="bg-card rounded-lg border border-border p-4 space-y-2">
+          <label className="text-sm font-bold text-card-foreground">Seu nome (opcional)</label>
+          <input
+            type="text"
+            value={customerName}
+            onChange={(e) => setCustomerName(e.target.value)}
+            placeholder="Ex: Matheus"
+            maxLength={50}
+            className="w-full bg-background border border-input rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          />
         </div>
 
         {!method ? (
