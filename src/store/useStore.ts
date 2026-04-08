@@ -20,7 +20,7 @@ interface AppStore {
   // Orders
   orders: Order[];
   nextOrderNumber: number;
-  createOrder: (items: CartItem[], total: number) => Order;
+  createOrder: (items: CartItem[], total: number, customerName?: string) => Order;
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
 
   // Current completed order (for confirmation screen)
