@@ -1,7 +1,14 @@
 import { create } from "zustand";
 import { CartItem, Order, OrderStatus, Product } from "@/types/order";
+import { products as defaultProducts } from "@/data/products";
 
 interface AppStore {
+  // Products
+  products: Product[];
+  addProduct: (product: Omit<Product, "id">) => void;
+  updateProduct: (id: string, data: Partial<Omit<Product, "id">>) => void;
+  deleteProduct: (id: string) => void;
+
   // Cart
   cart: CartItem[];
   addToCart: (product: Product) => void;
@@ -22,6 +29,24 @@ interface AppStore {
 }
 
 export const useStore = create<AppStore>((set, get) => ({
+  products: [...defaultProducts],
+
+  addProduct: (data) =>
+    set((state) => ({
+      products: [...state.products, { ...data, id: crypto.randomUUID() }],
+    })),
+
+  updateProduct: (id, data) =>
+    set((state) => ({
+      products: state.products.map((p) => (p.id === id ? { ...p, ...data } : p)),
+    })),
+
+  deleteProduct: (id) =>
+    set((state) => ({
+      products: state.products.filter((p) => p.id !== id),
+      cart: state.cart.filter((i) => i.product.id !== id),
+    })),
+
   cart: [],
 
   addToCart: (product) =>
