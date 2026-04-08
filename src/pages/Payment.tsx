@@ -81,12 +81,12 @@ const Payment = () => {
         </div>
 
         <div className="bg-card rounded-lg border border-border p-4 space-y-2">
-          <label className="text-sm font-bold text-card-foreground">Seu nome (opcional)</label>
+          <label className="text-sm font-bold text-card-foreground">Seu nome</label>
           <input
             type="text"
             value={customerName}
             onChange={(e) => setCustomerName(e.target.value)}
-            placeholder="Ex: Matheus"
+            placeholder="Digite seu nome"
             maxLength={50}
             className="w-full bg-background border border-input rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
