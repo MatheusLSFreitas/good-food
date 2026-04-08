@@ -1,8 +1,10 @@
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
-import { products } from "@/data/products";
+import { useStore } from "@/store/useStore";
 
 const Index = () => {
+  const products = useStore((s) => s.products);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -13,11 +15,15 @@ const Index = () => {
             Escolha seus itens e retire sem fila!
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {products.length === 0 ? (
+          <p className="text-center text-muted-foreground py-12">Nenhum produto disponível.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
