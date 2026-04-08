@@ -6,6 +6,8 @@ import Index from "./pages/Index";
 import Payment from "./pages/Payment";
 import Confirmation from "./pages/Confirmation";
 import OrdersPanel from "./pages/OrdersPanel";
+import AdminLogin from "./pages/AdminLogin";
+import { AdminRoute } from "./components/AdminRoute";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
