@@ -51,9 +51,9 @@ const OrdersPanel = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background w-full max-w-[100vw] overflow-x-hidden">
       <Header />
-      <main className="container py-6">
+      <main className="container py-6 px-4">
         <h1 className="text-2xl font-extrabold text-foreground text-center mb-6">Painel Administrativo</h1>
 
         <Tabs defaultValue="orders" className="w-full">
