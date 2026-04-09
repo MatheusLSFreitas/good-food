@@ -1,13 +1,14 @@
 import { CartDrawer } from "./CartDrawer";
-import { UtensilsCrossed, ClipboardList } from "lucide-react";
+import { ClipboardList } from "lucide-react";
 import { Link } from "react-router-dom";
+import logoImg from "@/assets/logo-unasp-food.png";
 
 export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-primary shadow-md">
       <div className="container flex items-center justify-between h-16">
         <Link to="/" className="flex items-center gap-2">
-          <UtensilsCrossed size={28} className="text-primary-foreground" />
+          <img src={logoImg} alt="UNASP Food logo" className="h-8 w-auto" />
           <span className="text-primary-foreground font-extrabold text-xl tracking-tight">
             UNASP Food
           </span>
