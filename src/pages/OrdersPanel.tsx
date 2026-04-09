@@ -145,15 +145,15 @@ const OrdersPanel = () => {
                 {products.map((p) => (
                   <div
                     key={p.id}
-                    className="flex items-center gap-4 bg-card border border-border rounded-lg p-3"
+                    className="flex items-center gap-3 bg-card border border-border rounded-lg p-3 w-full"
                   >
                     <img src={p.image} alt={p.name} className="w-14 h-14 rounded-md object-cover shrink-0" />
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 overflow-hidden">
                       <p className="font-bold text-card-foreground truncate">{p.name}</p>
-                      <p className="text-sm text-muted-foreground truncate">{p.description}</p>
+                      <p className="text-sm text-muted-foreground break-words whitespace-normal line-clamp-2">{p.description}</p>
                       <p className="text-sm font-extrabold text-primary">R$ {p.price.toFixed(2)}</p>
                     </div>
-                    <div className="flex gap-1 shrink-0">
+                    <div className="flex gap-1 shrink-0 pl-1">
                       <Button variant="ghost" size="icon" onClick={() => handleEdit(p)}>
                         <Pencil size={16} />
                       </Button>
