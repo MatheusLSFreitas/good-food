@@ -50,13 +50,21 @@ const Confirmation = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => navigate("/")}
-          className="inline-flex items-center gap-2 text-primary font-bold hover:opacity-80 transition-opacity min-h-[48px] px-4"
-        >
-          <ArrowLeft size={20} />
-          Voltar ao cardápio
-        </button>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <button
+            onClick={() => navigate("/meus-pedidos")}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity min-h-[48px]"
+          >
+            Acompanhar pedido
+          </button>
+          <button
+            onClick={() => navigate("/")}
+            className="inline-flex items-center gap-2 text-primary font-bold hover:opacity-80 transition-opacity min-h-[48px] px-4"
+          >
+            <ArrowLeft size={20} />
+            Voltar ao cardápio
+          </button>
+        </div>
       </main>
     </div>
   );
