@@ -8,7 +8,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-primary shadow-md">
       <div className="container flex items-center justify-between h-16">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logoImg} alt="UNASP Food logo" className="h-8 w-auto" />
+          <img src={logoImg} alt="UNASP Food logo" className="h-10 w-auto" />
           <span className="text-primary-foreground font-extrabold text-xl tracking-tight">
             UNASP Food
           </span>
