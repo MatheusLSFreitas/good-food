@@ -26,7 +26,26 @@ interface AppStore {
   // Current completed order (for confirmation screen)
   currentOrder: Order | null;
   setCurrentOrder: (order: Order | null) => void;
+
+  // My orders (persisted locally)
+  myOrderIds: string[];
 }
+
+// Load persisted order IDs
+const loadMyOrderIds = (): string[] => {
+  try {
+    const stored = localStorage.getItem("myOrderIds");
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+};
+
+const saveMyOrderIds = (ids: string[]) => {
+  try {
+    localStorage.setItem("myOrderIds", JSON.stringify(ids));
+  } catch {}
+};
 
 export const useStore = create<AppStore>((set, get) => ({
   products: [...defaultProducts],
@@ -98,9 +117,12 @@ export const useStore = create<AppStore>((set, get) => ({
       status: "paid",
       createdAt: new Date(),
     };
+    const newMyIds = [...get().myOrderIds, order.id];
+    saveMyOrderIds(newMyIds);
     set((state) => ({
       orders: [...state.orders, order],
       nextOrderNumber: state.nextOrderNumber + 1,
+      myOrderIds: newMyIds,
     }));
     return order;
   },
@@ -114,4 +136,6 @@ export const useStore = create<AppStore>((set, get) => ({
 
   currentOrder: null,
   setCurrentOrder: (order) => set({ currentOrder: order }),
+
+  myOrderIds: loadMyOrderIds(),
 }));

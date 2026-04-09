@@ -1,5 +1,5 @@
 import { CartDrawer } from "./CartDrawer";
-import { UtensilsCrossed } from "lucide-react";
+import { UtensilsCrossed, ClipboardList } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Header() {
@@ -12,10 +12,17 @@ export function Header() {
             UNASP Food
           </span>
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link
+            to="/meus-pedidos"
+            className="flex items-center gap-1 text-primary-foreground/80 hover:text-primary-foreground font-semibold text-sm transition-colors min-h-[44px] px-2"
+          >
+            <ClipboardList size={18} />
+            <span className="hidden sm:inline">Pedidos</span>
+          </Link>
           <Link
             to="/admin"
-            className="text-primary-foreground/80 hover:text-primary-foreground font-semibold text-sm transition-colors"
+            className="text-primary-foreground/80 hover:text-primary-foreground font-semibold text-sm transition-colors min-h-[44px] flex items-center px-2"
           >
             Painel
           </Link>
