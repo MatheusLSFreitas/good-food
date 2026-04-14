@@ -94,3 +94,16 @@
     text-wrap: balance;
   }
 }
+
+/* =========================================
+   MODO NINJA: Ocultar marca d'água do Lovable
+   ========================================= */
+[id*="lovable"], 
+[class*="lovable"],
+a[href*="lovable.dev"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
+}

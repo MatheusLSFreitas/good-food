@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { supabase } from "@/lib/supabase";
 import { CartItem, Order, OrderStatus, Product } from "@/types/order";
 import { products as defaultProducts } from "@/data/products";
 
@@ -20,7 +21,7 @@ interface AppStore {
   // Orders
   orders: Order[];
   nextOrderNumber: number;
-  createOrder: (items: CartItem[], total: number, customerName?: string) => Order;
+  createOrder: (items: CartItem[], total: number, customerName?: string) => Promise<Order>;
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
 
   // Current completed order (for confirmation screen)
@@ -52,7 +53,7 @@ export const useStore = create<AppStore>((set, get) => ({
 
   addProduct: (data) =>
     set((state) => ({
-      products: [...state.products, { ...data, id: crypto.randomUUID() }],
+      products: [...state.products, { ...data, id: Date.now().toString() }],
     })),
 
   updateProduct: (id, data) =>
@@ -106,26 +107,60 @@ export const useStore = create<AppStore>((set, get) => ({
   orders: [],
   nextOrderNumber: 1,
 
-  createOrder: (items, total, customerName) => {
-    const num = get().nextOrderNumber;
-    const order: Order = {
-      id: crypto.randomUUID(),
-      number: String(num).padStart(3, "0"),
-      customerName: customerName?.trim() || undefined,
-      items,
-      total,
-      status: "paid",
-      createdAt: new Date(),
-    };
-    const newMyIds = [...get().myOrderIds, order.id];
-    saveMyOrderIds(newMyIds);
-    set((state) => ({
-      orders: [...state.orders, order],
-      nextOrderNumber: state.nextOrderNumber + 1,
-      myOrderIds: newMyIds,
-    }));
+  createOrder: async (items, total, customerName) => {
+
+  const num = get().nextOrderNumber;
+
+  const order: Order = {
+    id: Date.now().toString(),
+    number: String(num).padStart(3, "0"),
+    customerName: customerName?.trim() || undefined,
+    items,
+    total,
+    status: "paid",
+    createdAt: new Date(),
+  };
+
+  // 🔥 salvar pedido
+  const { data, error } = await supabase
+    .from("pedidos")
+    .insert([
+      {
+        mesa: 1,
+        observacoes: customerName || "",
+      },
+    ])
+    .select();
+
+  if (error) {
+    console.error("Erro ao salvar pedido:", error);
     return order;
-  },
+  }
+
+  const pedidoId = data[0].id;
+
+  // 🔥 salvar itens
+  const itensFormatados = items.map((i) => ({
+    pedido_id: pedidoId,
+    nome_item: i.product.name,
+    categoria: i.product.category || "geral",
+    quantidade: i.quantity,
+  }));
+
+  await supabase.from("itens_pedido").insert(itensFormatados);
+
+  // mantém funcionamento local
+  const newMyIds = [...get().myOrderIds, order.id];
+  saveMyOrderIds(newMyIds);
+
+  set((state) => ({
+    orders: [...state.orders, order],
+    nextOrderNumber: state.nextOrderNumber + 1,
+    myOrderIds: newMyIds,
+  }));
+
+  return order;
+},
 
   updateOrderStatus: (orderId, status) =>
     set((state) => ({
