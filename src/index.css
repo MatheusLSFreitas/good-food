@@ -6,37 +6,42 @@
 
 @layer base {
   :root {
-    --background: 30 30% 97%;
-    --foreground: 20 20% 12%;
+    /* Paleta verde inspirada na fachada "Good Food" */
+    --background: 90 25% 97%;
+    --foreground: 140 30% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 20 20% 12%;
+    --card-foreground: 140 30% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 20% 12%;
+    --popover-foreground: 140 30% 12%;
 
-    --primary: 4 80% 52%;
-    --primary-foreground: 0 0% 100%;
+    /* Verde escuro principal (fachada) */
+    --primary: 140 38% 22%;
+    --primary-foreground: 45 60% 92%;
+    --primary-glow: 140 35% 35%;
 
-    --secondary: 32 95% 55%;
+    /* Verde médio secundário */
+    --secondary: 140 30% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 30 20% 93%;
-    --muted-foreground: 20 10% 50%;
+    --muted: 90 20% 93%;
+    --muted-foreground: 140 12% 40%;
 
-    --accent: 45 100% 55%;
-    --accent-foreground: 20 20% 12%;
+    /* Dourado quente (letreiro) como destaque */
+    --accent: 42 75% 58%;
+    --accent-foreground: 140 38% 18%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 75% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 15% 88%;
-    --input: 30 15% 88%;
-    --ring: 4 80% 52%;
+    --border: 140 15% 86%;
+    --input: 140 15% 88%;
+    --ring: 140 38% 28%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
-    --success: 142 70% 45%;
+    --success: 142 65% 38%;
     --success-foreground: 0 0% 100%;
 
     --sidebar-background: 0 0% 98%;
