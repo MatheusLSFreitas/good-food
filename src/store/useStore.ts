@@ -143,7 +143,7 @@ export const useStore = create<AppStore>((set, get) => ({
   const itensFormatados = items.map((i) => ({
     pedido_id: pedidoId,
     nome_item: i.product.name,
-    categoria: i.product.category || "geral",
+    categoria: "geral",
     quantidade: i.quantity,
   }));
 
