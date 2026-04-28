@@ -100,7 +100,7 @@ const Payment = () => {
 
           <div className="flex justify-between font-bold mt-2">
             <span>Total</span>
-            <span>R$ {total.toFixed(2)}</span>
+            <span>{formatBRL(total)}</span>
           </div>
         </div>
 
