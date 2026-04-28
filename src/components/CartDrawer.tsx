@@ -60,7 +60,7 @@ export function CartDrawer() {
                       {item.product.name}
                     </h4>
                     <p className="text-primary font-extrabold text-sm">
-                      R$ {(item.product.price * item.quantity).toFixed(2)}
+                      {formatBRL(item.product.price * item.quantity)}
                     </p>
                     <div className="flex items-center gap-3 mt-2">
                       <button
