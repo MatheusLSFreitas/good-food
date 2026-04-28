@@ -3,6 +3,7 @@ import { ShoppingCart, Minus, Plus, Trash2 } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { formatBRL } from "@/lib/utils";
 
 export function CartDrawer() {
   const cart = useStore((s) => s.cart);
@@ -59,7 +60,7 @@ export function CartDrawer() {
                       {item.product.name}
                     </h4>
                     <p className="text-primary font-extrabold text-sm">
-                      R$ {(item.product.price * item.quantity).toFixed(2)}
+                      {formatBRL(item.product.price * item.quantity)}
                     </p>
                     <div className="flex items-center gap-3 mt-2">
                       <button
@@ -92,7 +93,7 @@ export function CartDrawer() {
             <div className="border-t border-border pt-4 mt-4 space-y-4 pb-2">
               <div className="flex justify-between text-lg font-extrabold text-foreground">
                 <span>Total</span>
-                <span className="text-primary">R$ {total.toFixed(2)}</span>
+                <span className="text-primary">{formatBRL(total)}</span>
               </div>
               <button
                 onClick={() => {

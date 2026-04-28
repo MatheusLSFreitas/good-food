@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { useStore } from "@/store/useStore";
+import { formatBRL } from "@/lib/utils";
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -92,14 +93,14 @@ const Payment = () => {
                 {item.quantity}x {item.product.name}
               </span>
               <span>
-                R$ {(item.product.price * item.quantity).toFixed(2)}
+                {formatBRL(item.product.price * item.quantity)}
               </span>
             </div>
           ))}
 
           <div className="flex justify-between font-bold mt-2">
             <span>Total</span>
-            <span>R$ {total.toFixed(2)}</span>
+            <span>{formatBRL(total)}</span>
           </div>
         </div>
 

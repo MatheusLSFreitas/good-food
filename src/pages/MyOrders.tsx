@@ -5,6 +5,7 @@ import { ChefHat, CheckCircle2, Clock, ShoppingBag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import type { OrderStatus } from "@/types/order";
+import { formatBRL } from "@/lib/utils";
 
 const statusConfig: Record<OrderStatus, { label: string; icon: React.ReactNode; color: string }> = {
   paid: { label: "Pago", icon: <Clock size={14} />, color: "bg-secondary text-secondary-foreground" },
@@ -75,7 +76,7 @@ const MyOrders = () => {
                   </div>
 
                   <div className="flex items-center justify-between pt-1 border-t border-border">
-                    <span className="font-extrabold text-foreground">R$ {order.total.toFixed(2)}</span>
+                    <span className="font-extrabold text-foreground">{formatBRL(order.total)}</span>
                     {order.status === "ready" && (
                       <span className="text-success font-bold text-sm">✅ Pronto para retirada!</span>
                     )}

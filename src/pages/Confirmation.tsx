@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { useStore } from "@/store/useStore";
 import { CheckCircle2, ArrowLeft } from "lucide-react";
+import { formatBRL } from "@/lib/utils";
 
 const Confirmation = () => {
   const navigate = useNavigate();
@@ -41,12 +42,12 @@ const Confirmation = () => {
           {currentOrder.items.map((item) => (
             <div key={item.product.id} className="flex justify-between text-sm text-card-foreground py-0.5">
               <span>{item.quantity}x {item.product.name}</span>
-              <span className="font-bold">R$ {(item.product.price * item.quantity).toFixed(2)}</span>
+              <span className="font-bold">{formatBRL(item.product.price * item.quantity)}</span>
             </div>
           ))}
           <div className="border-t border-border pt-2 flex justify-between font-extrabold text-foreground">
             <span>Total</span>
-            <span className="text-primary">R$ {currentOrder.total.toFixed(2)}</span>
+            <span className="text-primary">{formatBRL(currentOrder.total)}</span>
           </div>
         </div>
 
