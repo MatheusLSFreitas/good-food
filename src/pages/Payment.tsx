@@ -93,7 +93,7 @@ const Payment = () => {
                 {item.quantity}x {item.product.name}
               </span>
               <span>
-                R$ {(item.product.price * item.quantity).toFixed(2)}
+                {formatBRL(item.product.price * item.quantity)}
               </span>
             </div>
           ))}
