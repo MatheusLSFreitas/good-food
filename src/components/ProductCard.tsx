@@ -37,7 +37,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </p>
         <div className="flex items-center justify-between pt-1">
           <span className="text-xl font-extrabold text-primary">
-            R$ {product.price.toFixed(2)}
+            {formatBRL(product.price)}
           </span>
           <button
             onClick={handleAdd}
