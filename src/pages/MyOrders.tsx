@@ -5,6 +5,7 @@ import { ChefHat, CheckCircle2, Clock, ShoppingBag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import type { OrderStatus } from "@/types/order";
+import { formatBRL } from "@/lib/utils";
 
 const statusConfig: Record<OrderStatus, { label: string; icon: React.ReactNode; color: string }> = {
   paid: { label: "Pago", icon: <Clock size={14} />, color: "bg-secondary text-secondary-foreground" },
