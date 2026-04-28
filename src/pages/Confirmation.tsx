@@ -47,7 +47,7 @@ const Confirmation = () => {
           ))}
           <div className="border-t border-border pt-2 flex justify-between font-extrabold text-foreground">
             <span>Total</span>
-            <span className="text-primary">R$ {currentOrder.total.toFixed(2)}</span>
+            <span className="text-primary">{formatBRL(currentOrder.total)}</span>
           </div>
         </div>
 
