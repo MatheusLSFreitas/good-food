@@ -93,7 +93,7 @@ export function CartDrawer() {
             <div className="border-t border-border pt-4 mt-4 space-y-4 pb-2">
               <div className="flex justify-between text-lg font-extrabold text-foreground">
                 <span>Total</span>
-                <span className="text-primary">R$ {total.toFixed(2)}</span>
+                <span className="text-primary">{formatBRL(total)}</span>
               </div>
               <button
                 onClick={() => {
