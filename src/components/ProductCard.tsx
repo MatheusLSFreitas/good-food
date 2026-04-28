@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import { Product } from "@/types/order";
 import { useStore } from "@/store/useStore";
 import { toast } from "sonner";
+import { formatBRL } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
