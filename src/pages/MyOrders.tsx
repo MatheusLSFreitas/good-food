@@ -76,7 +76,7 @@ const MyOrders = () => {
                   </div>
 
                   <div className="flex items-center justify-between pt-1 border-t border-border">
-                    <span className="font-extrabold text-foreground">R$ {order.total.toFixed(2)}</span>
+                    <span className="font-extrabold text-foreground">{formatBRL(order.total)}</span>
                     {order.status === "ready" && (
                       <span className="text-success font-bold text-sm">✅ Pronto para retirada!</span>
                     )}
