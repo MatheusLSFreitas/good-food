@@ -42,7 +42,7 @@ const Confirmation = () => {
           {currentOrder.items.map((item) => (
             <div key={item.product.id} className="flex justify-between text-sm text-card-foreground py-0.5">
               <span>{item.quantity}x {item.product.name}</span>
-              <span className="font-bold">R$ {(item.product.price * item.quantity).toFixed(2)}</span>
+              <span className="font-bold">{formatBRL(item.product.price * item.quantity)}</span>
             </div>
           ))}
           <div className="border-t border-border pt-2 flex justify-between font-extrabold text-foreground">
