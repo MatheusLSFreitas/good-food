@@ -3,6 +3,7 @@ import { ShoppingCart, Minus, Plus, Trash2 } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { formatBRL } from "@/lib/utils";
 
 export function CartDrawer() {
   const cart = useStore((s) => s.cart);
