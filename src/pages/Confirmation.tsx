@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { useStore } from "@/store/useStore";
 import { CheckCircle2, ArrowLeft } from "lucide-react";
+import { formatBRL } from "@/lib/utils";
 
 const Confirmation = () => {
   const navigate = useNavigate();
