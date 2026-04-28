@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { useStore } from "@/store/useStore";
+import { formatBRL } from "@/lib/utils";
 
 const Payment = () => {
   const navigate = useNavigate();
