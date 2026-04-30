@@ -10,12 +10,12 @@ export function Header() {
           {/* AQUI ESTÁ A MUDANÇA: Substituímos o ícone pela sua logo */}
           <img 
             src="/logo.png" 
-            alt="Logo UNASP Food" 
+            alt="Logo Good Food" 
             className="w-10 h-10 object-contain" 
           />
           
           <span className="text-primary-foreground font-extrabold text-xl tracking-tight">
-            UNASP Food
+            Good Food
           </span>
         </Link>
         <div className="flex items-center gap-2 sm:gap-3">
