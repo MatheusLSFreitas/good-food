@@ -15,6 +15,7 @@ export type OrderStatus = "paid" | "preparing" | "ready";
 
 export interface Order {
   id: string;
+  dbId?: number;
   number: string;
   customerName?: string;
   items: CartItem[];
