@@ -109,11 +109,23 @@ export const useStore = create<AppStore>((set, get) => ({
 
   createOrder: async (items, total, customerName) => {
 
-  const num = get().nextOrderNumber;
+  // 🔥 buscar última senha no banco
+  let nextNum = 1;
+  const { data: lastRows, error: lastErr } = await supabase
+    .from("pedidos")
+    .select("senha")
+    .order("senha", { ascending: false })
+    .limit(1);
+
+  if (lastErr) {
+    console.error("Erro ao buscar última senha:", lastErr);
+  } else if (lastRows && lastRows.length > 0 && lastRows[0].senha != null) {
+    nextNum = Number(lastRows[0].senha) + 1;
+  }
 
   const order: Order = {
     id: Date.now().toString(),
-    number: String(num).padStart(3, "0"),
+    number: String(nextNum).padStart(3, "0"),
     customerName: customerName?.trim() || undefined,
     items,
     total,
@@ -121,13 +133,14 @@ export const useStore = create<AppStore>((set, get) => ({
     createdAt: new Date(),
   };
 
-  // 🔥 salvar pedido
+  // 🔥 salvar pedido com a senha
   const { data, error } = await supabase
     .from("pedidos")
     .insert([
       {
         mesa: 1,
         observacoes: customerName || "",
+        senha: nextNum,
       },
     ])
     .select();
