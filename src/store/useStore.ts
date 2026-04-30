@@ -151,6 +151,7 @@ export const useStore = create<AppStore>((set, get) => ({
   }
 
   const pedidoId = data[0].id;
+  order.dbId = pedidoId;
 
   // 🔥 salvar itens
   const itensFormatados = items.map((i) => ({
@@ -179,6 +180,13 @@ export const useStore = create<AppStore>((set, get) => ({
     set((state) => ({
       orders: state.orders.map((o) =>
         o.id === orderId ? { ...o, status } : o
+      ),
+    })),
+
+  updateOrderStatusByDbId: (dbId: number, status: OrderStatus) =>
+    set((state) => ({
+      orders: state.orders.map((o) =>
+        o.dbId === dbId ? { ...o, status } : o
       ),
     })),
 
