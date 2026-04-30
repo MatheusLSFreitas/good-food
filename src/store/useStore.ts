@@ -23,6 +23,7 @@ interface AppStore {
   nextOrderNumber: number;
   createOrder: (items: CartItem[], total: number, customerName?: string) => Promise<Order>;
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
+  updateOrderStatusByDbId: (dbId: number, status: OrderStatus) => void;
 
   // Current completed order (for confirmation screen)
   currentOrder: Order | null;
