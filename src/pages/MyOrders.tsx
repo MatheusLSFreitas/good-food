@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import type { OrderStatus } from "@/types/order";
 import { formatBRL } from "@/lib/utils";
+import { supabase } from "@/lib/supabase";
 
 const statusConfig: Record<OrderStatus, { label: string; icon: React.ReactNode; color: string }> = {
   paid: { label: "Pago", icon: <Clock size={14} />, color: "bg-secondary text-secondary-foreground" },
@@ -13,17 +14,51 @@ const statusConfig: Record<OrderStatus, { label: string; icon: React.ReactNode; 
   ready: { label: "Pronto", icon: <CheckCircle2 size={14} />, color: "bg-success text-success-foreground" },
 };
 
+const dbToAppStatus = (s?: string): OrderStatus => {
+  if (s === "preparando") return "preparing";
+  if (s === "pronto") return "ready";
+  return "paid";
+};
+
 const MyOrders = () => {
   const orders = useStore((s) => s.orders);
   const myOrderIds = useStore((s) => s.myOrderIds);
+  const updateOrderStatusByDbId = useStore((s) => s.updateOrderStatusByDbId);
 
-  // Force re-render every 3 seconds to pick up status changes
   useEffect(() => {
-    const interval = setInterval(() => {
-      useStore.getState(); // triggers subscription
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    const state = useStore.getState();
+    const myOrders = state.orders.filter((o) => state.myOrderIds.includes(o.id));
+    const dbIds = myOrders.map((o) => o.dbId).filter(Boolean) as number[];
+
+    if (dbIds.length > 0) {
+      supabase
+        .from("pedidos")
+        .select("id, status")
+        .in("id", dbIds)
+        .then(({ data }) => {
+          data?.forEach((row: any) => {
+            updateOrderStatusByDbId(row.id, dbToAppStatus(row.status));
+          });
+        });
+    }
+
+    const channel = supabase
+      .channel("pedidos-status-changes")
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "pedidos" },
+        (payload) => {
+          const row: any = payload.new;
+          if (!row?.id) return;
+          updateOrderStatusByDbId(row.id, dbToAppStatus(row.status));
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [updateOrderStatusByDbId]);
 
   const myOrders = orders.filter((o) => myOrderIds.includes(o.id));
   const sortedOrders = [...myOrders].reverse();
