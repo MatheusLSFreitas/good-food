@@ -13,12 +13,14 @@ const statusConfig: Record<OrderStatus, { label: string; icon: React.ReactNode; 
   preparing: { label: "Preparando", icon: <ChefHat size={14} />, color: "bg-warning text-warning-foreground" },
   ready: { label: "Pronto", icon: <CheckCircle2 size={14} />, color: "bg-success text-success-foreground" },
   cancelled: { label: "Cancelado", icon: <XCircle size={14} />, color: "bg-destructive text-destructive-foreground" },
+  delivered: { label: "Entregue", icon: <CheckCircle2 size={14} />, color: "bg-muted text-muted-foreground" },
 };
 
 const dbToAppStatus = (s?: string): OrderStatus => {
   if (s === "preparando") return "preparing";
   if (s === "pronto") return "ready";
   if (s === "cancelado") return "cancelled";
+  if (s === "entregue") return "delivered";
   return "paid";
 };
 
@@ -122,6 +124,9 @@ const MyOrders = () => {
                     )}
                     {order.status === "cancelled" && (
                       <span className="text-destructive font-bold text-sm">❌ Pedido cancelado</span>
+                    )}
+                    {order.status === "delivered" && (
+                      <span className="text-muted-foreground font-bold text-sm">✔️ Pedido retirado</span>
                     )}
                   </div>
                 </div>
