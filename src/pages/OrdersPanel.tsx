@@ -16,7 +16,7 @@ interface ItemPedido {
   quantidade: number;
 }
 
-type PedidoStatus = "pago" | "preparando" | "pronto";
+type PedidoStatus = "pago" | "preparando" | "pronto" | "cancelado";
 
 interface Pedido {
   id: number;
@@ -27,10 +27,18 @@ interface Pedido {
   itens: ItemPedido[];
 }
 
-const statusConfig: Record<PedidoStatus, { label: string; variant: "default" | "secondary" | "destructive" }> = {
-  pago: { label: "Pago", variant: "secondary" },
-  preparando: { label: "Preparando", variant: "default" },
-  pronto: { label: "Pronto", variant: "destructive" },
+const statusConfig: Record<PedidoStatus, { label: string; variant: "info" | "warning" | "success" | "destructive" }> = {
+  pago: { label: "Pago", variant: "info" },
+  preparando: { label: "Preparando", variant: "warning" },
+  pronto: { label: "Pronto", variant: "success" },
+  cancelado: { label: "Cancelado", variant: "destructive" },
+};
+
+const statusButtonVariant: Record<PedidoStatus, "info" | "warning" | "success" | "destructive"> = {
+  pago: "info",
+  preparando: "warning",
+  pronto: "success",
+  cancelado: "destructive",
 };
 
 const OrdersPanel = () => {
@@ -147,19 +155,19 @@ const OrdersPanel = () => {
                     <div className="flex flex-wrap gap-2 pt-2 border-t">
                       <Button
                         size="sm"
-                        variant={status === "pago" ? "default" : "outline"}
+                        variant={status === "pago" ? statusButtonVariant.pago : "outline"}
                         onClick={() => handleStatusChange(pedido.id, "pago")}
                         className="flex-1 min-w-[90px] min-h-[44px]"
                       >Pago</Button>
                       <Button
                         size="sm"
-                        variant={status === "preparando" ? "default" : "outline"}
+                        variant={status === "preparando" ? statusButtonVariant.preparando : "outline"}
                         onClick={() => handleStatusChange(pedido.id, "preparando")}
                         className="flex-1 min-w-[90px] min-h-[44px]"
                       >Preparando</Button>
                       <Button
                         size="sm"
-                        variant={status === "pronto" ? "default" : "outline"}
+                        variant={status === "pronto" ? statusButtonVariant.pronto : "outline"}
                         onClick={() => handleStatusChange(pedido.id, "pronto")}
                         className="flex-1 min-w-[90px] min-h-[44px]"
                       >Pronto</Button>
