@@ -11,7 +11,7 @@ export interface CartItem {
   quantity: number;
 }
 
-export type OrderStatus = "paid" | "preparing" | "ready" | "cancelled";
+export type OrderStatus = "paid" | "preparing" | "ready" | "cancelled" | "delivered";
 
 export interface Order {
   id: string;
