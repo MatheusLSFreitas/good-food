@@ -125,6 +125,9 @@ const MyOrders = () => {
                     {order.status === "cancelled" && (
                       <span className="text-destructive font-bold text-sm">❌ Pedido cancelado</span>
                     )}
+                    {order.status === "delivered" && (
+                      <span className="text-muted-foreground font-bold text-sm">✔️ Pedido retirado</span>
+                    )}
                   </div>
                 </div>
               );
