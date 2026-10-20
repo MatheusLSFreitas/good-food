@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { useStore } from "@/store/useStore";
 import { useEffect } from "react";
-import { ChefHat, CheckCircle2, Clock, ShoppingBag } from "lucide-react";
+import { ChefHat, CheckCircle2, Clock, ShoppingBag, XCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import type { OrderStatus } from "@/types/order";
@@ -9,14 +9,16 @@ import { formatBRL } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
 
 const statusConfig: Record<OrderStatus, { label: string; icon: React.ReactNode; color: string }> = {
-  paid: { label: "Pago", icon: <Clock size={14} />, color: "bg-secondary text-secondary-foreground" },
-  preparing: { label: "Preparando", icon: <ChefHat size={14} />, color: "bg-accent text-accent-foreground" },
+  paid: { label: "Pago", icon: <Clock size={14} />, color: "bg-info text-info-foreground" },
+  preparing: { label: "Preparando", icon: <ChefHat size={14} />, color: "bg-warning text-warning-foreground" },
   ready: { label: "Pronto", icon: <CheckCircle2 size={14} />, color: "bg-success text-success-foreground" },
+  cancelled: { label: "Cancelado", icon: <XCircle size={14} />, color: "bg-destructive text-destructive-foreground" },
 };
 
 const dbToAppStatus = (s?: string): OrderStatus => {
   if (s === "preparando") return "preparing";
   if (s === "pronto") return "ready";
+  if (s === "cancelado") return "cancelled";
   return "paid";
 };
 
@@ -116,7 +118,10 @@ const MyOrders = () => {
                       <span className="text-success font-bold text-sm">✅ Pronto para retirada!</span>
                     )}
                     {order.status === "preparing" && (
-                      <span className="text-accent-foreground font-bold text-sm animate-pulse">🍳 Sendo preparado...</span>
+                      <span className="text-warning font-bold text-sm animate-pulse">🍳 Sendo preparado...</span>
+                    )}
+                    {order.status === "cancelled" && (
+                      <span className="text-destructive font-bold text-sm">❌ Pedido cancelado</span>
                     )}
                   </div>
                 </div>
