@@ -37,12 +37,12 @@ interface Pedido {
   itens: ItemPedido[];
 }
 
-const statusConfig: Record<PedidoStatus, { label: string; variant: "info" | "warning" | "success" | "destructive" }> = {
+const statusConfig: Record<PedidoStatus, { label: string; variant: "info" | "warning" | "success" | "destructive" | "muted" }> = {
   pago: { label: "Pago", variant: "info" },
   preparando: { label: "Preparando", variant: "warning" },
   pronto: { label: "Pronto", variant: "success" },
   cancelado: { label: "Cancelado", variant: "destructive" },
-  entregue: { label: "Entregue", variant: "success" },
+  entregue: { label: "Entregue", variant: "muted" },
 };
 
 const formatTime = (iso: string) =>
